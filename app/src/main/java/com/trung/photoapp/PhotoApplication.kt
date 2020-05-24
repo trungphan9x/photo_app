@@ -16,9 +16,11 @@ class PhotoApplication : Application() {
 
         startKoin {
             // Android context
-            androidContext(this@PhotoApplication)
+            androidContext(applicationContext)
             // modules
-            modules(viewModelModule, roomModule, repositoryModule)
+            modules(
+                listOf(viewModelModule, roomModule, repositoryModule)
+            )
         }
     }
 

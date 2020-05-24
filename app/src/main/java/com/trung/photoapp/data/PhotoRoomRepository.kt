@@ -5,8 +5,15 @@ import com.trung.photoapp.data.db.dao.PhotoDetailEntityDao
 import com.trung.photoapp.data.db.entity.PhotoDetailEntity
 
 class PhotoRoomRepository(private val photoDetailEntityDao: PhotoDetailEntityDao) {
-    val allPhoto: LiveData<List<PhotoDetailEntity>> = photoDetailEntityDao.getAlphabetizedWords()
+    val allAlphabetizedPhoto: LiveData<List<PhotoDetailEntity>> =
+        photoDetailEntityDao.getAlphabetizedPhotos()
 
-    suspend fun insert(photoDetailEntity: PhotoDetailEntity) =
-        photoDetailEntityDao.insert(photoDetailEntity)
+    val allAscendedPhoto: LiveData<List<PhotoDetailEntity>> =
+        photoDetailEntityDao.getAscendedPhotos()
+
+    suspend fun insert(photo: PhotoDetailEntity) =
+        photoDetailEntityDao.insert(photo)
+
+    suspend fun insertAll(listPhoto: List<PhotoDetailEntity>) =
+        photoDetailEntityDao.insertAll(listPhoto)
 }

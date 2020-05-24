@@ -11,8 +11,6 @@ import androidx.fragment.app.Fragment
 abstract class BaseFragment<T : ViewDataBinding> : Fragment() {
     abstract fun getLayoutResId(): Int
 
-    abstract fun viewDidLoad()
-
     protected lateinit var binding: T
         private set
 
@@ -27,7 +25,6 @@ abstract class BaseFragment<T : ViewDataBinding> : Fragment() {
             null,
             true
         )
-        viewDidLoad()
         return binding.root
     }
 }

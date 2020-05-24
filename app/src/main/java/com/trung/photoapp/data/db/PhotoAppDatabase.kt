@@ -39,10 +39,10 @@ abstract class PhotoAppDatabase : RoomDatabase() {
             }
         }
 
-//        fun getInstance(context: Context): PhotoAppDatabase =
-//            INSTANCE ?: synchronized(this) {
-//                INSTANCE ?: build(context).also { INSTANCE = it }
-//            }
+        fun getInstance(context: Context): PhotoAppDatabase =
+            INSTANCE ?: synchronized(this) {
+                INSTANCE ?: build(context).also { INSTANCE = it }
+            }
 
         private fun build(context: Context) =
             Room.databaseBuilder(context.applicationContext, PhotoAppDatabase::class.java, DB_NAME)

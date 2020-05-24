@@ -7,7 +7,7 @@ import org.koin.dsl.module
 
 val roomModule = module {
     single {
-        PhotoAppDatabase.getDatabase(androidApplication())
+        PhotoAppDatabase.getInstance(androidApplication())
     }
 
     single(createdAtStart = false) { get<PhotoAppDatabase>().getPhotoDetailEntityDao() }

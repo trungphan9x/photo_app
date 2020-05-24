@@ -3,10 +3,10 @@ package com.trung.photoapp.ui.activity.home
 import android.os.Bundle
 import com.trung.photoapp.R
 import com.trung.photoapp.core.BaseActivity
-import com.trung.photoapp.core.PagerAdapter
+import com.trung.photoapp.core.CustomPagerAdapter
 import com.trung.photoapp.databinding.ActivityHomeBinding
-import com.trung.photoapp.ui.fragment.listphoto1.ListAFragment
-import com.trung.photoapp.ui.fragment.listphoto2.ListBFragment
+import com.trung.photoapp.ui.fragment.listphoto.listphoto1.ListAFragment
+import com.trung.photoapp.ui.fragment.listphoto.listphoto2.ListBFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeActivity : BaseActivity<ActivityHomeBinding>() {
@@ -21,7 +21,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
         binding.lifecycleOwner = this
         binding.vm = viewModel
 
-        binding.pager.adapter = PagerAdapter(
+        binding.pager.adapter = CustomPagerAdapter(
             supportFragmentManager,
             arrayListOf(ListAFragment(), ListBFragment()),
             arrayListOf("List A", "List B")
