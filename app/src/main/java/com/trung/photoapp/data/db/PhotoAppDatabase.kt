@@ -15,29 +15,12 @@ abstract class PhotoAppDatabase : RoomDatabase() {
     abstract fun getPhotoDetailEntityDao(): PhotoDetailEntityDao
 
     companion object {
-        // Singleton prevents multiple instances of database opening at the
-        // same time.
+        // Singleton prevents multiple instances of database opening at the same time.
         const val DB_VERSION = 1
         private const val DB_NAME = "photo_app_database"
 
         @Volatile
         private var INSTANCE: PhotoAppDatabase? = null
-
-        fun getDatabase(context: Context): PhotoAppDatabase {
-            val tempInstance = INSTANCE
-            if (tempInstance != null) {
-                return tempInstance
-            }
-            synchronized(this) {
-                val instance = Room.databaseBuilder(
-                    context.applicationContext,
-                    PhotoAppDatabase::class.java,
-                    DB_NAME
-                ).build()
-                INSTANCE = instance
-                return instance
-            }
-        }
 
         fun getInstance(context: Context): PhotoAppDatabase =
             INSTANCE ?: synchronized(this) {

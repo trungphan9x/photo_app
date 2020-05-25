@@ -2,20 +2,34 @@ package com.trung.photoapp.ui.fragment.listphoto
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.trung.photoapp.PhotoApplication.Companion.context
 import com.trung.photoapp.R
 import com.trung.photoapp.core.BaseAdapter
 import com.trung.photoapp.data.db.entity.PhotoDetailEntity
 import com.trung.photoapp.databinding.ItemPhotolistBinding
+import com.trung.photoapp.di.GlideApp
+import java.util.*
+import kotlin.collections.ArrayList
 
-class ListPhotoAdapter : BaseAdapter<PhotoDetailEntity, ListPhotoAdapter.ViewHolder>() {
+class ListPhotoAdapter : BaseAdapter<PhotoDetailEntity, ListPhotoAdapter.ViewHolder>(), Filterable {
 
     lateinit var binding: ItemPhotolistBinding
 
     private var onItemClickListener: ((Int, PhotoDetailEntity) -> Unit)? = null
+
+    var photoFilterList = ArrayList<PhotoDetailEntity>()
+
+    init {
+        photoFilterList = items
+    }
+
+    override fun getItemCount(): Int {
+        return photoFilterList.size
+    }
 
     fun setOnItemClickListener(onItemClickListener: ((Int, PhotoDetailEntity) -> Unit)) {
         this.onItemClickListener = onItemClickListener
@@ -28,7 +42,7 @@ class ListPhotoAdapter : BaseAdapter<PhotoDetailEntity, ListPhotoAdapter.ViewHol
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        holder.bind(items[position], onItemClickListener)
+        holder.bind(photoFilterList[position], onItemClickListener)
     }
 
     class ViewHolder(private val binding: ItemPhotolistBinding) :
@@ -38,7 +52,7 @@ class ListPhotoAdapter : BaseAdapter<PhotoDetailEntity, ListPhotoAdapter.ViewHol
             onItemClickListener: ((Int, PhotoDetailEntity) -> Unit)?
         ) {
             context.let {
-                Glide.with(it)
+                GlideApp.with(it)
                     .applyDefaultRequestOptions(RequestOptions().placeholder(R.drawable.ic_default))
                     .load(photoDetailEntity.urlPhoto).into(binding.ivPhotoUrl)
             }
@@ -58,4 +72,35 @@ class ListPhotoAdapter : BaseAdapter<PhotoDetailEntity, ListPhotoAdapter.ViewHol
 //            override fun areContentsTheSame(oldItem: PhotoDetailEntity, newItem: PhotoDetailEntity) = oldItem == newItem
 //        }
 //    }
+
+    override fun getFilter(): Filter {
+        return object : Filter() {
+            override fun performFiltering(constraint: CharSequence?): FilterResults {
+                val charSearch = constraint.toString()
+                if (charSearch.isEmpty()) {
+                    photoFilterList = items
+                } else {
+                    val resultList = ArrayList<PhotoDetailEntity>()
+                    for (row in items) {
+                        if (row.name?.toLowerCase(Locale.ROOT)
+                                ?.contains(charSearch.toLowerCase(Locale.ROOT))!!
+                        ) {
+                            resultList.add(row)
+                        }
+                    }
+                    photoFilterList = resultList
+                }
+                val filterResults = FilterResults()
+                filterResults.values = photoFilterList
+                return filterResults
+            }
+
+            @Suppress("UNCHECKED_CAST")
+            override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
+                photoFilterList = results?.values as ArrayList<PhotoDetailEntity>
+                notifyDataSetChanged()
+            }
+
+        }
+    }
 }

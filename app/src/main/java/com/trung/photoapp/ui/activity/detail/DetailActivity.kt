@@ -2,7 +2,9 @@ package com.trung.photoapp.ui.activity.detail
 
 import android.app.Activity
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
+import androidx.annotation.RequiresApi
 import com.trung.photoapp.R
 import com.trung.photoapp.core.BaseActivity
 import com.trung.photoapp.data.db.entity.PhotoDetailEntity
@@ -17,7 +19,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>() {
         super.onCreate(savedInstanceState)
 
         binding.vm = viewModel
-
+        viewModel.detailView = this
         intent?.let {
             viewModel.detailPhotoName.set(intent.getStringExtra(DETAIL_PHOTO_NAME))
             viewModel.detailPhotoUrl.set(intent.getStringExtra(DETAIL_PHOTO_URL))
@@ -31,6 +33,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>() {
         private const val DETAIL_PHOTO_URL = "detail_photo_url"
         private const val DETAIL_PHOTO_DESCRIPTION = "detail_photo_description"
 
+        @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
         fun startActivity(activity: Activity?, detailPhoto: PhotoDetailEntity) {
             Intent(activity, DetailActivity::class.java).apply {
                 this.putExtra(DETAIL_PHOTO_NAME, detailPhoto.name)
@@ -38,6 +41,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>() {
                 this.putExtra(DETAIL_PHOTO_DESCRIPTION, detailPhoto.description)
             }.also {
                 activity?.startActivity(it)
+                activity?.overridePendingTransition(R.anim.bounce, R.anim.fade_in)
             }
         }
     }

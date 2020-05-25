@@ -11,6 +11,4 @@ data class PhotoDetailEntity(
     @ColumnInfo(name = "name") val name: String?,
     @ColumnInfo(name = "url_photo") val urlPhoto: String?,
     @ColumnInfo(name = "description") val description: String?
-) {
-    companion object
-}
+)

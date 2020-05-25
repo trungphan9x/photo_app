@@ -2,12 +2,12 @@ package com.trung.photoapp.util
 
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.databinding.BindingAdapter
-import com.bumptech.glide.Glide
 import com.trung.photoapp.R
+import com.trung.photoapp.di.GlideApp
 
 @BindingAdapter("setUrlPhoto")
 fun AppCompatImageView.setUrlImage(url: String?) {
-    Glide.with(this)
+    GlideApp.with(this)
         .load(url)
         .placeholder(R.drawable.ic_default)
         .error(R.drawable.ic_default)
