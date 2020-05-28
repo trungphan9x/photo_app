@@ -10,6 +10,6 @@ import org.koin.dsl.module
 val viewModelModule = module {
     viewModel { DetailViewModel() }
     viewModel { HomeViewModel() }
-    viewModel { ListAViewModel(get()) }
+    viewModel { ListAViewModel(get(), get()) }
     viewModel { ListBViewModel(get()) }
 }

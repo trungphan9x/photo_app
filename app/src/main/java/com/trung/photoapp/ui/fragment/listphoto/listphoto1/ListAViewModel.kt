@@ -3,16 +3,21 @@ package com.trung.photoapp.ui.fragment.listphoto.listphoto1
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import com.trung.photoapp.core.BaseViewModel
-import com.trung.photoapp.data.PhotoRoomRepository
 import com.trung.photoapp.data.db.entity.PhotoDetailEntity
+import com.trung.photoapp.data.remote.response.PhotoDetail
+import com.trung.photoapp.data.repository.api.PhotoApiRepository.PhotoAPIRepository
+import com.trung.photoapp.data.repository.room.PhotoRoomRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class ListAViewModel(private val photoRoomRepository: PhotoRoomRepository) : BaseViewModel() {
+class ListAViewModel(
+    private val photoRoomRepository: PhotoRoomRepository,
+    private val photoAPIRepository: PhotoAPIRepository
+) : BaseViewModel() {
     var allPhoto: LiveData<List<PhotoDetailEntity>> = photoRoomRepository.allAlphabetizedPhoto
 
-    private val listPhotoInserted = arrayListOf<PhotoDetailEntity>(
-        PhotoDetailEntity(
+    private val listPhotoInserted = arrayListOf<PhotoDetail>(
+        PhotoDetail(
             id = 1,
             name = "Adele",
             urlPhoto = "https://www.insidehook.com/wp-content/uploads/2020/05/GettyImages-518037594.jpg?fit=1800%2C1198",
@@ -24,7 +29,7 @@ class ListAViewModel(private val photoRoomRepository: PhotoRoomRepository) : Bas
                     "\n" +
                     "In 2011, 2012, and 2016, Adele was named Artist of the Year by Billboard. At the 2012 and 2016 Ivor Novello Awards, Adele was named Songwriter of the Year by the British Academy of Songwriters, Composers, and Authors. In 2012, she was listed at number five on VH1's 100 Greatest Women in Music. Time magazine named her one of the most influential people in the world in 2012 and 2016. Her 2016–2017 tour, saw her break attendance records in a number of countries, including the UK, Australia, and the US. With sales of more than 120 million records, Adele is one of the world's best-selling music artists.[8]"
         ),
-        PhotoDetailEntity(
+        PhotoDetail(
             id = 2,
             name = "Bill Gate",
             urlPhoto = "https://vcdn-giadinh.vnecdn.net/2019/04/17/sam-5028-1555475169.jpg",
@@ -36,97 +41,97 @@ class ListAViewModel(private val photoRoomRepository: PhotoRoomRepository) : Bas
                     "\n" +
                     "Later in his career and since leaving day-to-day operations at Microsoft in 2008, Gates pursued a number of philanthropic endeavors. He donated large amounts of money to various charitable organizations and scientific research programs through the Bill & Melinda Gates Foundation, reported to be the world's largest private charity.[16] In 2009, Gates and Warren Buffett founded The Giving Pledge, whereby they and other billionaires pledge to give at least half of their wealth to philanthropy.[17] The foundation says that it works to save lives and improve global health, and is working with Rotary International to eliminate polio.[18]"
         ),
-        PhotoDetailEntity(
+        PhotoDetail(
             id = 3,
             name = "Steve Jobs",
             urlPhoto = "https://st.quantrimang.com/photos/image/012013/29/stevejobs.jpg",
             description = "I love you"
         ),
-        PhotoDetailEntity(
+        PhotoDetail(
             id = 4,
             name = "Jack Ma",
             urlPhoto = "https://thumbor.forbes.com/thumbor/fit-in/416x416/filters%3Aformat%28jpg%29/https%3A%2F%2Fspecials-images.forbesimg.com%2Fimageserve%2F5e75465a10380d0006bdcb9f%2F0x0.jpg%3Fbackground%3D000000%26cropX1%3D1089%26cropX2%3D2195%26cropY1%3D4%26cropY2%3D1109",
             description = "I love you"
         ),
-        PhotoDetailEntity(
+        PhotoDetail(
             id = 5,
             name = "BTS",
             urlPhoto = "https://www.cheatsheet.com/wp-content/uploads/2020/05/BTS-band.jpg",
             description = "I love youI love you"
         ),
-        PhotoDetailEntity(
+        PhotoDetail(
             id = 6,
             name = "ABBA",
             urlPhoto = "https://cdnmedia.thethaovanhoa.vn/Upload/leenEplQKY7jsunvYUYgg/files/2020/05/abba1.jpg",
             description = "I love youI love youI love youI love you"
         ),
-        PhotoDetailEntity(
+        PhotoDetail(
             id = 7,
             name = "Michael Jackson",
             urlPhoto = "https://www.biography.com/.image/t_share/MTE1ODA0OTcxMjkwNTYwMDEz/michael-jackson-pepsi-commercial-raw.jpg",
             description = "I love youI love youI love youI love youI love you"
         ),
-        PhotoDetailEntity(
+        PhotoDetail(
             id = 8,
             name = "taylor swift",
             urlPhoto = "https://cdn.vox-cdn.com/thumbor/sKobvhE31vUDeQrW_WNKH0MKQUo=/1400x1400/filters:format(jpeg)/cdn.vox-cdn.com/uploads/chorus_asset/file/19378373/1164343509.jpg.jpg",
             description = "I love youI love youI love youI love you"
         ),
-        PhotoDetailEntity(
+        PhotoDetail(
             id = 9,
             name = "Son Tung MTP",
             urlPhoto = "https://www.sbs.com.au/popasia/sites/sbs.com.au.popasia/files/sontungmtp.png",
             description = "I love you"
         ),
-        PhotoDetailEntity(
+        PhotoDetail(
             id = 10,
             name = "Bich Phuong",
             urlPhoto = "https://i.ytimg.com/vi/ZF3b1nK-TjM/maxresdefault.jpg",
             description = "I love youI love youI love you"
         ),
-        PhotoDetailEntity(
+        PhotoDetail(
             id = 11,
             name = "Trump",
             urlPhoto = "https://pmcdeadline2.files.wordpress.com/2019/10/shutterstock_editorial_10434333bm.jpg",
             description = "I love youI love youI love youI love you"
         ),
-        PhotoDetailEntity(
+        PhotoDetail(
             id = 12,
             name = "hillary clinton",
             urlPhoto = "https://i.guim.co.uk/img/media/6ede975e12b9a69dfa85868e3eae9f6d2a35fe00/0_106_4445_2668/master/4445.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=128f856b0840d52fb4f55808000606f3",
             description = "I love youI love youI love youI love you"
         ),
-        PhotoDetailEntity(
+        PhotoDetail(
             id = 13,
             name = "john f kennedy",
             urlPhoto = "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/John_F._Kennedy%2C_White_House_color_photo_portrait.jpg/1200px-John_F._Kennedy%2C_White_House_color_photo_portrait.jpg",
             description = "I love youI love youI love youI love youI love youI love you"
         ),
-        PhotoDetailEntity(
+        PhotoDetail(
             id = 14,
             name = "Mun Jae In",
             urlPhoto = "https://upload.wikimedia.org/wikipedia/commons/c/c9/Moon_Jae-in_%282017-10-01%29_cropped.jpg",
             description = "I love youI love youI love youI love youI love you"
         ),
-        PhotoDetailEntity(
+        PhotoDetail(
             id = 15,
             name = "My Tam",
             urlPhoto = "https://nld.mediacdn.vn/2018/2/3/13-chot-15176700723471428987902.jpg",
             description = "I love youI love you"
         ),
-        PhotoDetailEntity(
+        PhotoDetail(
             id = 16,
             name = "Ho Ngoc Ha",
             urlPhoto = "https://media.tinmoi.vn/upload/camnhung/2020/05/23/141208-ho-ngoc-ha-bi-choi-xau-tm1.jpg",
             description = "I love youI love youI love youI love you"
         ),
-        PhotoDetailEntity(
+        PhotoDetail(
             id = 17,
             name = "one direction",
             urlPhoto = "https://www.spectatornews.com/wp-content/uploads/2020/04/WEB_1DReunion_Submitted-900x506.jpg",
             description = "I love youI love youI love you"
         ),
-        PhotoDetailEntity(
+        PhotoDetail(
             id = 18,
             name = "kelly clarkson",
             urlPhoto = "https://akns-images.eonline.com/eol_images/Entire_Site/201984/rs_600x600-190904154151-600-the-kelly-clarkson-show.jpg?fit=around|1200:1200&crop=1200:1200;center,top&output-quality=90",
@@ -135,16 +140,29 @@ class ListAViewModel(private val photoRoomRepository: PhotoRoomRepository) : Bas
     )
 
     init {
-        insertAll(listPhotoInserted)
+        getPhotoDetailFromApi()
+        //insertAll(listPhotoInserted)
     }
 
-    fun insert(photoDetailEntity: PhotoDetailEntity) = viewModelScope.launch(Dispatchers.IO) {
-        photoRoomRepository.insert(photoDetailEntity)
+    fun insert(photoDetail: PhotoDetail) = viewModelScope.launch(Dispatchers.IO) {
+        photoRoomRepository.insert(photoDetail)
     }
 
-    fun insertAll(listPhoto: List<PhotoDetailEntity>) = viewModelScope.launch(Dispatchers.IO) {
-        photoRoomRepository.insertAll(listPhoto).let {
-            allPhoto = photoRoomRepository.allAlphabetizedPhoto
+    fun insertAll(listPhoto: List<PhotoDetail>) = viewModelScope.launch(Dispatchers.IO) {
+        photoRoomRepository.insertAll(listPhoto)
+    }
+
+    private fun getPhotoDetailFromApi() {
+        viewModelScope.launch(Dispatchers.IO) {
+
+            try {
+                photoAPIRepository.getPhotoDetailFromApi().let {
+                    insertAll(it.data)
+                }
+            } catch (ex: Exception) {
+
+            }
+
         }
     }
 }
