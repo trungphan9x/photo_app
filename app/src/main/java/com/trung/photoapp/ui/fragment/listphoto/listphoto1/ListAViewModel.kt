@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.trung.photoapp.core.BaseViewModel
 import com.trung.photoapp.data.db.entity.PhotoDetailEntity
 import com.trung.photoapp.data.remote.response.PhotoDetail
-import com.trung.photoapp.data.repository.api.PhotoApiRepository.PhotoAPIRepository
+import com.trung.photoapp.data.repository.api.PhotoAPIRepository
 import com.trung.photoapp.data.repository.room.PhotoRoomRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

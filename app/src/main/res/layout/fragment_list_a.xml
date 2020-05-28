@@ -19,13 +19,13 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:clipToPadding="false"
+            app:layout_constraintTop_toTopOf="parent"
 
             android:padding="10dp"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:layout_constraintTop_toTopOf="parent"
             app:listData="@{vm.allPhoto}"
             app:spanCount="2"
-            tools:itemCount="16"
+            tools:itemCount="8"
 
             tools:listitem="@layout/item_photolist" />
 

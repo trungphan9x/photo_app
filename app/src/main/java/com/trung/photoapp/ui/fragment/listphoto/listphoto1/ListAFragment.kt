@@ -41,6 +41,5 @@ class ListAFragment : BaseFragment<FragmentListABinding>() {
         homeViewModel.searchLiveData.observe(viewLifecycleOwner, Observer { newText ->
             adapterA.filter.filter(newText)
         })
-
     }
 }

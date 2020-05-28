@@ -1,4 +1,4 @@
-package com.trung.photoapp.data.repository.api.PhotoApiRepository
+package com.trung.photoapp.data.repository.api
 
 import com.trung.photoapp.data.remote.PhotoAppResponseBody
 import com.trung.photoapp.data.remote.api.PhotoAppAPI

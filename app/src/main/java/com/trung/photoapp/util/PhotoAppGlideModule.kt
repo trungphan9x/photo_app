@@ -1,4 +1,4 @@
-package com.trung.photoapp.di
+package com.trung.photoapp.util
 
 import android.content.Context
 import com.bumptech.glide.GlideBuilder
@@ -21,5 +21,4 @@ class PhotoAppGlideModule : AppGlideModule() {
     }
 
     override fun isManifestParsingEnabled(): Boolean = false
-
 }

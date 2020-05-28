@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="photo_url"
-            type="String" />
+            name="photoDetailEntity"
+            type="com.trung.photoapp.data.db.entity.PhotoDetailEntity" />
 
         <variable
             name="vm"
@@ -25,7 +25,7 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_photo_url"
-                setUrlPhoto="@{photo_url}"
+                setUrlPhoto="@{photoDetailEntity.urlPhoto}"
                 android:layout_width="0dp"
                 android:layout_height="400dp"
                 android:scaleType="centerCrop"
@@ -40,17 +40,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:scaleType="fitCenter"
-                android:text="Hello World"
+                android:text="@{photoDetailEntity.name}"
                 android:textSize="20dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/iv_photo_url" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:layout_marginTop="5dp"
-                android:background="@color/colorPrimaryDark"
-                app:layout_constraintTop_toBottomOf="@id/tv_photo_name" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

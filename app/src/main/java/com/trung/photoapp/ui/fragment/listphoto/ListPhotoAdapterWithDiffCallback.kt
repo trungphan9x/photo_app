@@ -74,9 +74,7 @@ class ListPhotoAdapterWithDiffCallback :
             onItemClickListener: ((Int, PhotoDetailEntity) -> Unit)?
         ) {
 
-            binding.photoUrl = photoDetailEntity.urlPhoto
-
-            binding.tvPhotoName.text = photoDetailEntity.name
+            binding.photoDetailEntity = photoDetailEntity
 
             binding.root.setOnClickListener {
                 onItemClickListener?.invoke(position, photoDetailEntity)
@@ -120,7 +118,7 @@ class ListPhotoAdapterWithDiffCallback :
     }
 
     /**
-     * Allows the RecyclerView to determine which items have changed when the [List] of [MarsProperty]
+     * Allows the RecyclerView to determine which items have changed when the [List] of [PhotoDetailEntity]
      * has been updated.
      */
     companion object DiffCallback : DiffUtil.ItemCallback<PhotoDetailEntity>() {
