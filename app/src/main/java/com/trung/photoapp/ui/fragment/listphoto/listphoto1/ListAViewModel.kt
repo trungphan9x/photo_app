@@ -160,7 +160,7 @@ class ListAViewModel(
                     insertAll(it.data)
                 }
             } catch (ex: Exception) {
-
+                insertAll(listPhotoInserted)
             }
 
         }
