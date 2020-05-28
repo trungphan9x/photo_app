@@ -48,14 +48,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
                     android:layout_gravity="top"
-                    android:background="@drawable/scrim_topdown"
+                    android:src="@drawable/scrim_topdown"
                     android:fitsSystemWindows="true" />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="160dp"
                     android:layout_gravity="bottom"
-                    android:background="@drawable/scrim" />
+                    android:src="@drawable/scrim" />
 
                 <androidx.appcompat.widget.Toolbar
                     android:id="@+id/anim_toolbar"
